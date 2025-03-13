@@ -4,8 +4,6 @@ import { Board } from "../components/board/Board";
 import { Header } from "../components/layout/Header";
 import { Sidebar } from "../components/layout/Sidebar";
 
-
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">

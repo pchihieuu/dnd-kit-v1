@@ -1,7 +1,8 @@
-import React from 'react';
-import { Task as TaskType } from '../../types';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import React from "react";
+import { Task as TaskType } from "../../types";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { FiCalendar, FiMessageCircle, FiPaperclip } from "react-icons/fi";
 
 interface TaskProps {
   task: TaskType;
@@ -10,45 +11,40 @@ interface TaskProps {
 
 const getLabelColor = (label: string) => {
   switch (label) {
-    case 'Marketing':
-      return 'bg-purple-100 text-purple-700';
-    case 'Dev':
-      return 'bg-gray-100 text-gray-700';
-    case 'Templates':
-      return 'bg-green-100 text-green-700';
-    case 'Mobile':
-      return 'bg-pink-100 text-pink-700';
+    case "Marketing":
+      return "bg-purple-100 text-purple-700";
+    case "Dev":
+      return "bg-gray-100 text-gray-700";
+    case "Templates":
+      return "bg-green-100 text-green-700";
+    case "Mobile":
+      return "bg-pink-100 text-pink-700";
     default:
-      return 'bg-blue-100 text-blue-700';
+      return "bg-blue-100 text-blue-700";
   }
 };
 
 const getDateClass = (date?: string) => {
-  if (!date) return 'text-gray-500';
-  if (date === 'Today') return 'text-red-500';
-  if (date === 'Tomorrow') return 'text-orange-500';
-  return 'text-gray-500';
+  if (!date) return "text-gray-500";
+  if (date === "Today") return "text-red-500";
+  if (date === "Tomorrow") return "text-orange-500";
+  return "text-gray-500";
 };
 
 export const Task: React.FC<TaskProps> = ({ task, columnId }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition
-  } = useSortable({
-    id: task.id,
-    data: {
-      type: 'task',
-      task,
-      columnId
-    }
-  });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: task.id,
+      data: {
+        type: "task",
+        task,
+        columnId,
+      },
+    });
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition
+    transition,
   };
 
   return (
@@ -67,32 +63,32 @@ export const Task: React.FC<TaskProps> = ({ task, columnId }) => {
           </div>
         )}
       </div>
-      
+
       <div className="flex items-center text-sm text-gray-500 mt-2">
         {task.date && (
           <div className={`flex items-center mr-3 ${getDateClass(task.date)}`}>
-            <span className="mr-1">◯</span> {task.date}
+            <FiCalendar className="mr-1" /> {task.date}
           </div>
         )}
-        
+
         {task.comments && (
           <div className="flex items-center mr-3">
-            <span className="mr-1">◯</span> {task.comments}
+            <FiMessageCircle className="mr-1" /> {task.comments}
           </div>
         )}
-        
+
         {task.attachments && (
           <div className="flex items-center mr-3">
-            <span className="mr-1">◯</span> {task.attachments}
+            <FiPaperclip className="mr-1" /> {task.attachments}
           </div>
         )}
       </div>
-      
+
       {task.labels && task.labels.length > 0 && (
         <div className="mt-2 space-x-2">
           {task.labels.map((label, i) => (
-            <span 
-              key={i} 
+            <span
+              key={i}
               className={`text-xs px-2 py-1 rounded ${getLabelColor(label)}`}
             >
               {label}

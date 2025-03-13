@@ -10,7 +10,7 @@ import {
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { Task } from "./Task";
-import { useKanban } from "@/src/hooks/useKanban";
+import { useKanban } from "../../hooks/useKanban";
 
 export const Board: React.FC = () => {
   const { data, activeTask, handleDragStart, handleDragOver, handleDragEnd } =
